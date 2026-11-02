@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: ai-api
+  namespace: ai-platform
+  labels:
+    app: ai-api
+spec:
+  selector:
+    matchLabels:
+      app: ai-api
+  namespaceSelector:
+    matchNames: [ai-platform]
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

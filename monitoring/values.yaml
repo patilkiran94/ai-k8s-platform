@@ -1,0 +1,22 @@
+# Lightweight kube-prometheus-stack settings for a single-node kind cluster.
+alertmanager:
+  enabled: false
+nodeExporter:
+  enabled: false          # often unhappy inside kind; cAdvisor still gives pod CPU/mem
+prometheus:
+  prometheusSpec:
+    retention: 3d
+    # pick up ServiceMonitors from any namespace without needing a release label
+    serviceMonitorSelectorNilUsesHelmValues: false
+    podMonitorSelectorNilUsesHelmValues: false
+    resources:
+      requests: { cpu: 100m, memory: 400Mi }
+      limits:   { memory: 1Gi }
+grafana:
+  defaultDashboardsEnabled: true
+  sidecar:
+    dashboards:
+      enabled: true
+      label: grafana_dashboard
+      labelValue: "1"
+      searchNamespace: ALL

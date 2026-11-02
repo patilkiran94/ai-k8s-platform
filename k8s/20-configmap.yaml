@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ai-api-config
+  namespace: ai-platform
+data:
+  OLLAMA_URL: "http://ollama-host:11434"
+  MODEL_NAME: "${MODEL_NAME}"
+  REQUEST_TIMEOUT: "120"
+  LOG_LEVEL: "INFO"
